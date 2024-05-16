@@ -1,0 +1,48 @@
+/* google font  */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:wght@100..900&display=swap');
+
+/* tailwind CSS  */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+}
+
+h2, h3, h4, h5 {
+  font-family: "Cinzel", serif;
+}
+
+
+/* banner slider  */
+.slider {
+    height: 87vh !important;
+}
+.thumbs {
+    display: flex;
+    justify-content: center;
+}
+.img {
+    border-radius: 0px 200px 200px 200px;
+}
+
+/* featured  */
+
+.featured-item {
+    background-image: url('./assets/home/featured.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 760px) {
+    .slider {
+        height: 100% !important;
+    }
+}
