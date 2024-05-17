@@ -13,7 +13,7 @@ const Featured = () => {
                             heading={'FROM OUR MENU'}
                         ></SectionTitle>
                     </div>
-                    <div className="md:flex justify-center items-center gap-10 py-10 px-16">
+                    <div className="md:flex justify-center items-center gap-10  space-y-5 md:py-10 md:px-16">
                         <div>
                             <img className="object-cover" src={featuredImg} alt="" />
                         </div>

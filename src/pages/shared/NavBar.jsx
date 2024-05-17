@@ -5,8 +5,8 @@ const NavBar = () => {
 
     const navItems = <>
         <NavLink className="py-2 px-3 md:text-lg" to="/">Home</NavLink>
-        <NavLink className="py-2 px-3 md:text-lg" to="/about">About</NavLink>
-        <NavLink className="py-2 px-3 md:text-lg" to="/contact">Contact</NavLink>
+        <NavLink className="py-2 px-3 md:text-lg" to="/menu">Menu</NavLink>
+        <NavLink className="py-2 px-3 md:text-lg" to="/order/salad">Order Food</NavLink>
     </>
 
     return (
