@@ -41,6 +41,21 @@ h2, h3, h4, h5 {
     background-attachment: fixed;
 }
 
+/* signUp  */
+
+.signUp {
+    background-image: url('./assets/others/authentication.png');
+}
+
+
+/* signIn  */
+
+.signIn {
+    background-image: url('./assets/others/authentication.png');
+}
+
+/* responsive  */
+
 @media screen and (max-width: 760px) {
     .slider {
         height: 100% !important;

@@ -11,16 +11,17 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Testimonials = () => {
 
     const [reviews, setReviews] = useState([])
+    const axiosCommon = useAxiosCommon()
 
     useEffect(() => {
-        axios('/reviews.json')
+        axiosCommon('/reviews')
             .then(data => {
                 setReviews(data.data)
             })

@@ -1,12 +1,34 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { IoCartOutline } from "react-icons/io5";
+import useCart from "../../hooks/useCart";
 
 const NavBar = () => {
+    const [carts] = useCart();
 
+    const { user, logOutUser } = useContext(AuthContext);
     const navItems = <>
         <NavLink className="py-2 px-3 md:text-lg" to="/">Home</NavLink>
         <NavLink className="py-2 px-3 md:text-lg" to="/menu">Menu</NavLink>
         <NavLink className="py-2 px-3 md:text-lg" to="/order/salad">Order Food</NavLink>
+
+        {
+            user ?
+                <>
+                    <NavLink onClick={() => logOutUser()} className="py-2 px-3 md:text-lg">Log out</NavLink>
+                </> :
+                <>
+                    <NavLink className="py-2 px-3 md:text-lg" to="/login">Login</NavLink>
+                </>
+        }
+        <NavLink to="/dashboard/cart">
+            <button className="btn btn-sm bg-transparent border-0 mt-[6px]">
+                <IoCartOutline size={24} className="text-white" />
+                <div className="badge badge-secondary">+{carts.length}</div>
+            </button>
+        </NavLink>
+
     </>
 
     return (
@@ -25,8 +47,8 @@ const NavBar = () => {
                             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                             <div className="drawer-side">
                                 <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">                                                                 
-                                {navItems}
+                                <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                                    {navItems}
                                 </ul>
                             </div>
                         </div>
