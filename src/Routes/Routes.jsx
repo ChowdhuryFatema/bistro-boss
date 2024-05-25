@@ -10,6 +10,10 @@ import DashBoard from "../DashBoard/DashBoard";
 import Cart from "../pages/DashBoard/Cart/Cart";
 import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/DashBoard/Cart/AllUsers/AllUsers";
+import AddItems from "../pages/DashBoard/Cart/AllUsers/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
+import ManageItems from "../pages/DashBoard/ManageItems/ManageItems";
+import UpdateItem from "../pages/DashBoard/UpdateItem/UpdateItem";
 
 const router = createBrowserRouter([
     {
@@ -43,15 +47,30 @@ const router = createBrowserRouter([
       path: 'dashboard',
       element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute> ,
       children: [
+        // normal user routes
         {
           path: 'cart',
           element: <Cart></Cart>
         },
+
         // admin routes
         {
+          path: 'addItems',
+          element: <AdminRoute><AddItems></AddItems></AdminRoute>
+        },
+        {
+          path: 'manageItems',
+          element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+        },
+        {
+          path: 'updateItem/:id',
+          element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/menu/${params.id}`)
+        },
+        {
           path: 'allUsers',
-          element: <AllUsers></AllUsers>
-        }
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
       ]
     }
   ]);

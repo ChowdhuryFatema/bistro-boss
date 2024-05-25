@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
 
     const axiosCommon = useAxiosCommon();
-
     const { data: users = [], refetch } = useQuery({
 
         queryKey: ['user'],

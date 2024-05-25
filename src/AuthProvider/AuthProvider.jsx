@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
-import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+
 
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
+
+    const axiosPublic = useAxiosPublic();
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
@@ -65,32 +68,30 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-
-
-            const userEmail = currentUser?.email || user?.email;
-            const loggedUser = {email: userEmail}
+           
 
             setUser(currentUser);
             setLoading(false)
 
-            // if user exists then issue a token 
-            if( currentUser ){
-                axios.post('https://library-server-teal.vercel.app/jwt', loggedUser, {withCredentials: true})
+            if(currentUser){
+                const userInfo = { 
+                    email: currentUser?.email,
+                }
+                axiosPublic.post('/jwt', userInfo)
                 .then(data => {
-                    console.log('token response', data.data)
-                })
-            }else {
-                axios.post('https://library-server-teal.vercel.app/logout', loggedUser, {withCredentials: true})
-                .then(res => {
-                    console.log(res.data);
+                    if(data.data.token){
+                        localStorage.setItem('access-token', data.data.token)
+                    }
                 })
             }
-
+            else{
+                localStorage.removeItem('access-token')
+            }
 
         });
 
         return () => unSubscribe();
-    }, [user]);
+    }, []);
 
     const authInfo = {
         user,
